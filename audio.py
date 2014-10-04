@@ -38,8 +38,8 @@ def avgFilter(fftArray):
 	return fftArray2.clip(-threshhold,threshhold)
 
 def main():
-	rate1, data1 = scipy.io.wavfile.read('Clear Speech No Noise.wav')
-	rate2, data2 = scipy.io.wavfile.read('Clear Speech With Noise.wav')
+	rate1, data1 = scipy.io.wavfile.read('SineWave_440Hz.wav')
+	rate2, data2 = scipy.io.wavfile.read('SineWave2_440Hz.wav')
 
 	print ("rate 1: " + str(rate1))
 	print ("rate 2: " + str(rate2))
@@ -50,11 +50,18 @@ def main():
 	# f1 = fft(data1)
 	# f2 = fft(data2)
 
+	newData2 = data1[:]
+	for i in range(min(len(data1),len(data2))):
+		if data2[i]:
+			newData2[i] = data1[i]/data2[i]
+
 
 
 	# f3 = avgFilter(f2)
 
-	plotGraph(data1[:50], data2[:50])
+	plotGraph(data1[:1000], data2[:1000])
+	plotGraph(data2[:1000], newData2[:1000])
+
 	#plotSpecgram(data1)
 
 
