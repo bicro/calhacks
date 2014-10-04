@@ -1,6 +1,7 @@
 from numpy.fft import *
 from pylab import *
 from scipy.io import wavfile
+import scipy.io.wavfile
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
@@ -37,9 +38,22 @@ def avgFilter(fftArray):
 
 	return fftArray2.clip(-threshhold,threshhold)
 
+# def signalToWave():
+# 	Fs = 8000
+# 	f = 5
+# 	sample = 100
+# 	x = np.arange(sample)
+# 	y = np.sin(2 * * f * x / Fs)
+# 	plt.plot(x, y)
+# 	plt.xlabel('x')
+# 	plt.ylabel('sample(n)')
+# 	plt.show()
+
 def main():
-	rate1, data1 = scipy.io.wavfile.read('Clear Speech No Noise.wav')
-	rate2, data2 = scipy.io.wavfile.read('Clear Speech With Noise.wav')
+	rate1, data1 = scipy.io.wavfile.read('speech1.wav')
+	rate2, data2 = scipy.io.wavfile.read('noise1.wav')
+
+	# rate2, data2 = scipy.io.wavfile.read('Clear Speech With Noise.wav')
 
 	print ("rate 1: " + str(rate1))
 	print ("rate 2: " + str(rate2))
@@ -47,16 +61,23 @@ def main():
 	print ("data 1: " + str(data1))
 	print ("data 2: " + str(data2))
 
-	f1 = fft(data1)
-	f2 = fft(data2)
+	print ("data 1: " + str(len(data1)))
+	print ("data 1: " + str(len(data2)))
+
+	# f1 = fft(data1)
+	# f2 = fft(data2)
 
 
 
-	f3 = avgFilter(f2)
+	# f3 = avgFilter(f2)
 
-	plotGraph(f2,f3)
-	plotSpecgram(data1)
+	# plotGraph(f2,f3)
+	# plotSpecgram(data1)
 
+	result = 0.5 * data1 + 0.5 * data2
+
+	scipy.io.wavfile.write('result.wave',rate1,data1)
+	#signalToWave()
 
 
 if __name__ == "__main__":
