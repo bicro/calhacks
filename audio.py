@@ -7,7 +7,8 @@ import scipy
 import pylab
 
 def plotGraph(fftArray):
-	plt.plot(fftArray)
+	plt.figure(1)
+	plt.add_subplot(fftArray)
 	plt.show()
 
 
