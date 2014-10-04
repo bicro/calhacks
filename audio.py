@@ -47,15 +47,15 @@ def main():
 	print ("data 1: " + str(data1))
 	print ("data 2: " + str(data2))
 
-	f1 = fft(data1)
-	f2 = fft(data2)
+	# f1 = fft(data1)
+	# f2 = fft(data2)
 
 
 
-	f3 = avgFilter(f2)
+	# f3 = avgFilter(f2)
 
-	plotGraph(f2,f3)
-	plotSpecgram(data1)
+	plotGraph(data1[:50], data2[:50])
+	#plotSpecgram(data1)
 
 
 
