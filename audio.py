@@ -8,11 +8,11 @@ import pylab
 
 
 def plotGraph(fftArray1, fftArray2):
-	plt.figure(1)
-	plt.subplot(211)
+	#plt.figure(1)
+	#plt.subplot(211)
 	plt.plot(fftArray1)
-	plt.subplot(212)
-	plt.plot(fftArray2)
+	#plt.subplot(212)
+	#plt.plot(fftArray2)
 	plt.show()
 
 
@@ -38,9 +38,10 @@ def main():
 	f1 = fft(data1)
 	f2 = fft(data2)
 
-	plotGraph(f1,f2)
+	#plotGraph(data2,f2)
+	#plotGraph(data2,f2)
 	# plotGraph(f2)
-	# plotSpecgram(data1)
+	plotSpecgram(data2)
 
 if __name__ == "__main__":
 	main()
