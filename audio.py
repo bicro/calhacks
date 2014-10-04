@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy
 import pylab
+from statistics import mean
 
 
 def plotGraph(fftArray1, fftArray2):
-	plt.figure(1)
+	plt.figure(2)
 	plt.subplot(211)
 	plt.plot(fftArray1)
 	plt.subplot(212)
@@ -23,7 +24,14 @@ def plotSpecgram(fftArray):
 	samples = 5000
 	t = np.linspace(0, time_interval, samples)
 	Pxx, freqs, t, plot = pylab.specgram(fftArray, NFFT=128, Fs=44100, detrend=pylab.detrend_none, window=pylab.window_hanning, noverlap=int(128 * 0.5))
-	show()
+	plt.show()
+
+
+def avgFilter(fftArray):
+	mean_value = mean(fftArray)
+	for i in range(len(fftArray)):
+		if fftArray[i] > threshhold:
+			fftArray[i] =  threshhold
 
 def main():
 	rate1, data1 = scipy.io.wavfile.read('Clear Speech No Noise.wav')
@@ -38,9 +46,10 @@ def main():
 	f1 = fft(data1)
 	f2 = fft(data2)
 
+	f2 = avgFilter(f2)
+
 	plotGraph(f1,f2)
-	# plotGraph(f2)
-	# plotSpecgram(data1)
+	plotSpecgram(data1)
 
 if __name__ == "__main__":
 	main()
