@@ -6,6 +6,7 @@ import numpy as np
 import scipy
 import pylab
 
+
 def plotGraph(fftArray1, fftArray2):
 	plt.figure(1)
 	plt.subplot(211)
