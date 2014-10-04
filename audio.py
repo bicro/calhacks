@@ -6,13 +6,12 @@ import numpy as np
 import scipy
 import pylab
 
-
 def plotGraph(fftArray1, fftArray2):
 	plt.figure(2)
 	plt.subplot(211)
 	plt.plot(fftArray1)
-	#plt.subplot(212)
-	#plt.plot(fftArray2)
+	plt.subplot(212)
+	plt.plot(fftArray2)
 	plt.show()
 
 
@@ -27,10 +26,16 @@ def plotSpecgram(fftArray):
 
 
 def avgFilter(fftArray):
-	mean_value = mean(fftArray)
+	fftArray2 = fftArray[:]
+	total = 0
 	for i in range(len(fftArray)):
-		if fftArray[i] > threshhold:
-			fftArray[i] =  threshhold
+		total+=abs(fftArray[i])
+	mean = total/len(fftArray)
+
+	threshhold = mean * 1.5
+	
+
+	return fftArray2.clip(-threshhold,threshhold)
 
 def main():
 	rate1, data1 = scipy.io.wavfile.read('Clear Speech No Noise.wav')
@@ -46,10 +51,12 @@ def main():
 	f2 = fft(data2)
 
 
-	#f2 = avgFilter(f2)
 
-	plotGraph(f1,f2)
+	f3 = avgFilter(f2)
+
+	plotGraph(f2,f3)
 	plotSpecgram(data1)
+
 
 
 if __name__ == "__main__":
