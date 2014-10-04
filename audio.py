@@ -50,6 +50,8 @@ def main():
 	f1 = fft(data1)
 	f2 = fft(data2)
 
+
+
 	f3 = avgFilter(f2)
 
 	plotGraph(f2,f3)
