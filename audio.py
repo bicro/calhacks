@@ -2,6 +2,9 @@ import scipy.io.wavfile
 import matplotlib.pyplot as plt
 from numpy.fft import *
 
+from matplotlib import pyplot as plt
+
+
 rate, data = scipy.io.wavfile.read('Clear Speech No Noise.wav')
 
 print (data)
@@ -11,10 +14,11 @@ print (len(data))
 f = fft(data)
 
 
+#fft.freq
+
+
 plt.plot(f)
-print (f)
-
-
+plt.show()
 
 
 # fs, frames = scipy.io.wavfile.read('Clear Speech No Noise.wav')
