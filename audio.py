@@ -39,8 +39,8 @@ def avgFilter(fftArray):
 	return fftArray2.clip(-threshhold,threshhold)
 
 def main():
-	rate1, data1 = scipy.io.wavfile.read('SineWave_Merged.wav')
-	rate2, data2 = scipy.io.wavfile.read('SineWave_Low.wav')
+	rate1, data1 = scipy.io.wavfile.read('RohitSampleWIthNoise.wav')
+	rate2, data2 = scipy.io.wavfile.read('SampleNoise2.wav')
 
 	print ("rate 1: " + str(rate1))
 	print ("rate 2: " + str(rate2))
@@ -61,6 +61,16 @@ def main():
 
 	print (maxAmp)
 	print (minAmp)
+
+	# maxAmp = 0
+	# minAmp = 0
+
+	# for i in range(len(data1)):
+	# 	maxAmp = max(maxAmp,data1[i])
+	# 	minAmp = min(minAmp,data1[i])
+
+	# print (maxAmp)
+	# print (minAmp)
 
 	newData2 = data1[:]
 	for i in range(len(data1)):
