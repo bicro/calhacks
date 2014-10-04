@@ -49,7 +49,6 @@ def main():
 
 	f1 = fft(data1)
 	f2 = fft(data2)
-	sig = scipy.signal.filtfilt
 
 	f3 = avgFilter(f2)
 
