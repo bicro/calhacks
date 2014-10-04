@@ -10,8 +10,8 @@ def plotGraph(fftArray1, fftArray2):
 	plt.figure(2)
 	plt.subplot(211)
 	plt.plot(fftArray1)
-	plt.subplot(212)
-	plt.plot(fftArray2)
+	#plt.subplot(212)
+	#plt.plot(fftArray2)
 	plt.show()
 
 
@@ -50,11 +50,11 @@ def main():
 	f1 = fft(data1)
 	f2 = fft(data2)
 
-
 	f3 = avgFilter(f2)
 
 	plotGraph(f2,f3)
 	plotSpecgram(data1)
+
 
 if __name__ == "__main__":
 	main()
