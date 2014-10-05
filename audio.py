@@ -27,16 +27,12 @@ def plotSpecgram(fftArray):
 
 
 def avgFilter(fftArray):
-	fftArray2 = fftArray[:]
-	total = 0
-	for i in range(len(fftArray)):
-		total+=abs(fftArray[i])
-	mean = total/len(fftArray)
+	window_size = 10
+	#a2 = np.power(fftArray,2)
+	window = np.ones(window_size)/float(window_size)
+	convolved = np.convolve(fftArray,window)
+	return convolved
 
-	threshhold = mean * 1.5
-	
-
-	return fftArray2.clip(-threshhold,threshhold)
 
 def main():
 	rate1, data1 = scipy.io.wavfile.read('RohitSampleWIthNoise.wav')
@@ -48,13 +44,24 @@ def main():
 	print ("data 1: " + str(data1))
 	print ("data 2: " + str(data2))
 
-	# f1 = fft(data1)
+	f1 = rfft(data1)
 	# f2 = fft(data2)
 
+	plt.plot(f1)
+
+
+
+
+
+
+
+
+
+
+	#does filtering, pass 
 	maxAmp = 0
 	minAmp = 0
 
-	newData3 = data2[:]
 	for i in range(len(data2)):
 		maxAmp = max(maxAmp,data2[i])
 		minAmp = min(minAmp,data2[i])
@@ -62,42 +69,16 @@ def main():
 	print (maxAmp)
 	print (minAmp)
 
-	# maxAmp = 0
-	# minAmp = 0
+	newData2 = np.copy(data1)
 
-	# for i in range(len(data1)):
-	# 	maxAmp = max(maxAmp,data1[i])
-	# 	minAmp = min(minAmp,data1[i])
-
-	# print (maxAmp)
-	# print (minAmp)
-
-	newData2 = data1[:]
+	#plotGraph(data1, newData2)
 	for i in range(len(data1)):
-		if data1[i] < maxAmp and data1[i] > 0:
+		if data1[i] < maxAmp and data1[i] > minAmp:
 			newData2[i] = 0
 		else:
 			newData2[i] = data1[i]
-		if data1[i] > minAmp and data1[i] < 0:
-			newData2[i] = 0
-		else:
-			newData2[i] = data1[i]	
 
-
-	# for i in range(min(len(data1),len(data2))):
-	# 	if data2[i]:
-	# 		newData2[i] = data1[i]/data2[i]
-
-
-
-	# f3 = avgFilter(f2)
-
-	# plotGraph(data1[:1000], data2[:1000])
-	# plotGraph(data2[:1000], newData2[:1000])
-
-	#plotSpecgram(data1)
-
-	#plotGraph(newData2, newData2)
+	plotGraph(data1, newData2)
 	write('test.wav', 44100, newData2)
 
 
